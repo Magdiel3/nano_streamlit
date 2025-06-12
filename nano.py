@@ -16,7 +16,7 @@ st.write("""
 
     ## Objectives
     - [X] Load a dataset
-    - [ ] Display raw data
+    - [X] Display raw data
     - [ ] Do some basic data exploration
     - [ ] Add some basic pre-processing or cleanup
     - [ ] Add some basic interactive visualizations
@@ -43,3 +43,25 @@ st.write(f"""
 dataset_name = "./datasets/CoffeeAndCodeLT2018---CoffeeAndCodeLT2018.csv"
 df = pd.read_csv(dataset_name, encoding="utf-8")
 
+# DISPLAY RAW DATA
+
+st.write(f"""
+         ### Display raw data
+
+         Here we can see how the data was imported with just loading it with the default settings.
+         This following 5 top rows are displayed using the following code:
+            ```python
+            import streamlit as st
+            st.write("#### Raw Data (header)")
+            st.dataframe(df.head())
+            ```
+         #### Raw Data (header)
+         """)
+
+st.dataframe(df.head())
+
+st.write(f"""
+         > **NOTE:** Though we are displaying only 5 entries, the dataset contains {len(df)} rows
+         and {len(df.columns)} columns. These columns are:
+         """)
+st.write(df.columns.tolist())
