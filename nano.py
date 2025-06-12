@@ -19,7 +19,7 @@ st.write("""
     - [X] Display raw data
     - [X] Do some basic data exploration
     - [X] Add some basic pre-processing or cleanup
-    - [ ] Add some basic interactive visualizations
+    - [X] Add some basic interactive visualizations
     - [ ] Outline some non-scientific conclusions
 """)
 
@@ -130,3 +130,63 @@ st.write(f"""
             {len(df)} rows and {len(df.columns)} columns.
          """)
 st.dataframe(df.head())
+
+# NON STREAMLIT CODE
+print("This is something that will be executed either when this script is run directly with"
+      "python, or when it is launched with stramlit")
+rows = len(df)
+print(f"Total rows in the dataset: {rows}")
+print(df.columns.tolist())
+
+# INTERACTIVE DATA VISUALIZATION
+st.write("""
+         ### Interactive Data Visualization
+         For this demo, we can choose to visualize the distribution of the non-numeric columns by
+         selecting one from the dropdown below. This can be done using the following code:
+            ```python
+            st.write("#### Interactive Data Visualization")
+            selected_column = st.selectbox("Select a column to visualize", df.select_dtypes(include=['object']).columns)
+            st.bar_chart(data=df[selected_column].value_counts(), use_container_width=True)
+            ```
+         """)
+st.write("#### Interactive Data Visualization")
+selected_column = st.selectbox("Select a column to visualize", df.select_dtypes(include=['object']).columns)
+st.bar_chart(data=df[selected_column].value_counts(), use_container_width=True)
+
+st.write(f"""
+         But lets not stop here! We can select with a slider the range of coffe cups per day and
+         from that filtered dataset, we can visualize the distribution of the selected column in
+         the dropdown menu. This can be done using the following code:
+            ```python
+            min_cups, max_cups = st.slider(
+                "Select the range of coffee cups per day",
+                0, int(df['CoffeeCupsPerDay'].min()), (0, int(df['CoffeeCupsPerDay'].max()))
+            )
+            filtered_df = df[
+                (df['CoffeeCupsPerDay'] >= min_cups) & (df['CoffeeCupsPerDay'] <= max_cups)
+            ]
+            selected_column = st.selectbox(
+                "Select a column to visualize",
+                filtered_df.columns
+            )
+            st.bar_chart(
+                data=filtered_df[selected_column].value_counts(),
+                use_container_width=True
+            )
+            ```
+         """)
+min_cups, max_cups = st.slider(
+    "Select the range of coffee cups per day",
+    0, int(df['CoffeeCupsPerDay'].min()), (0, int(df['CoffeeCupsPerDay'].max()))
+)
+filtered_df = df[
+    (df['CoffeeCupsPerDay'] >= min_cups) & (df['CoffeeCupsPerDay'] <= max_cups)
+]
+selected_column = st.selectbox(
+    "Select a column to visualize",
+    filtered_df.columns
+)
+st.bar_chart(
+    data=filtered_df[selected_column].value_counts(),
+    use_container_width=True
+)
