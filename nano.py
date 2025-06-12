@@ -65,3 +65,49 @@ st.write(f"""
          and {len(df.columns)} columns. These columns are:
          """)
 st.write(df.columns.tolist())
+
+# DATA EXPLORATION
+
+st.write("""
+         ### Data Exploration
+         Now that we know the amount of data we are going to use, we can start exploring it. Some
+         of the basic statistics can be displayed using the following code:
+            ```python
+            st.write("#### Basic Statistics")
+            st.dataframe(df.describe())
+            ```
+         > **NOTE:** The `describe()` method provides a summary of the statistics only for the 
+            numeric columns in the dataset.
+         """)
+st.write("#### Basic Statistics")
+st.dataframe(df.describe())
+
+st.write("""
+         It is also useful to check for missing values in the dataset. This can be done using the
+         following code:
+            ```python
+            st.write("#### Missing Values")
+            st.dataframe(df.isnull().sum())
+            ```
+         """)
+st.write("#### Missing Values")
+st.dataframe(df.isnull().sum())
+
+st.write("#### Missing Values Visualization")
+st.write("""
+         But who likes to only see numbers? Let's visualize the missing values in a more. This can
+         be achieved with the following code:
+            ```python
+            st.write("#### Missing Values Visualization")
+            st.bar_chart(data=df.isnull().sum(), use_container_width=True)
+            ```
+         """)
+st.bar_chart(data=df.isnull().sum(), use_container_width=True)
+
+st.write(f"""
+         Dropping rows with missing values is a common practice, but it is not always the best. For
+         this demo, we will be dropping a total of {len(df[df.isnull().any(axis=1)])} rows with
+         missing values. (This is only {len(df[df.isnull().any(axis=1)]) / len(df) * 100:.2f}% of
+         the total dataset.)
+         """)
+
