@@ -20,7 +20,7 @@ st.write("""
     - [X] Do some basic data exploration
     - [X] Add some basic pre-processing or cleanup
     - [X] Add some basic interactive visualizations
-    - [ ] Outline some non-scientific conclusions
+    - [X] Outline some non-scientific conclusions
 """)
 
 # DATASET LOADING
@@ -190,3 +190,19 @@ st.bar_chart(
     data=filtered_df[selected_column].value_counts(),
     use_container_width=True
 )
+
+# NON-SCIENTIFIC CONCLUSIONS
+st.write("""
+         ### Non-Scientific Conclusions
+         This section is left for the reader as an excercise. Please write your conclusions here:
+         """)
+user_conclusions = st.text_area(
+    "Your non-scientific conclusions",
+    placeholder="Write your conclusions here...",
+    height=100
+)
+
+if user_conclusions:
+    st.write("### Congratulations! You read and follow all the demo steps.")
+else:
+    st.write("Missing something? (Look up)")
