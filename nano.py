@@ -17,8 +17,8 @@ st.write("""
     ## Objectives
     - [X] Load a dataset
     - [X] Display raw data
-    - [ ] Do some basic data exploration
-    - [ ] Add some basic pre-processing or cleanup
+    - [X] Do some basic data exploration
+    - [X] Add some basic pre-processing or cleanup
     - [ ] Add some basic interactive visualizations
     - [ ] Outline some non-scientific conclusions
 """)
@@ -111,3 +111,22 @@ st.write(f"""
          the total dataset.)
          """)
 
+# BASIC DATA CLEANUP
+st.write("""
+         ### Basic Data Cleanup
+         In this section, we will drop the rows with missing values. This can be done using the
+         following code:
+            ```python
+            df = df.dropna()
+            st.write("#### Data after dropping missing values")
+            st.dataframe(df.head())
+            ```
+         """)
+df = df.dropna()
+st.write("#### Data after dropping missing values")
+st.write(f"""
+         As tou can see, at least in the very first 5 rows we had an entry with missing values, so
+         it was dropped and no longer appears in the head of the dataset. Now we reaim with only
+            {len(df)} rows and {len(df.columns)} columns.
+         """)
+st.dataframe(df.head())
